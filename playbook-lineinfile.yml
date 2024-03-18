@@ -1,0 +1,10 @@
+---
+- name: Module lineinfile
+  hosts: debian
+
+  tasks:
+    - name: Module lineinfile
+      ansible.builtin.lineinfile:
+        dest: /tmp/data.txt
+        regex: Formation test
+        line: Formation Ansible
