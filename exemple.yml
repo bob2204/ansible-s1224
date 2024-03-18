@@ -1,0 +1,9 @@
+---
+stage:
+  titre: Formation Ansible
+  deb: 2024-03-18
+  fin: 2024-03-22
+  site: Lille
+  stagiaires:
+    - Sylvain
+    - Franck
