@@ -1,0 +1,8 @@
+ansible -m ping all
+ansible -m ping -a "data=OK" all
+
+ansible-doc ping
+ansible-doc -l
+ansible-doc -l -t connection
+ansible-doc -l -t become
+
