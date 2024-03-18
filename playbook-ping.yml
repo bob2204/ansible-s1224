@@ -1,0 +1,8 @@
+---
+- name: Premier acte
+  hosts: debian
+
+  tasks:
+    - name: Test de connexion
+      ansible.builtin.ping:
+        data: OK
