@@ -1,0 +1,9 @@
+---
+- name: Installation d'un serveur redis
+  hosts: debian
+
+  tasks:
+    - name: Installation du paquet redis-server
+      ansible.builtin.package:
+        name: redis-server
+        update_cache: true
