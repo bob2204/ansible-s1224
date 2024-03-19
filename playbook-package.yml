@@ -1,21 +1,5 @@
 ---
-- name: Installation d'un serveur redis
-  hosts: debian
-  become: true
-
-  tasks:
-    - name: Installation du paquet redis-server sur Debian
-      ansible.builtin.package:
-        name: redis-server
-        update_cache: true
-
-    - name: Configuration du service
-      ansible.builtin.systemd:
-        name: redis-server
-        state: started
-        enabled: true
-
-- name: Installation d'un serveur redis sur CentOS
+- name: Installation du paquet epel-release
   hosts: centos
   become: true
 
@@ -25,13 +9,19 @@
         name: epel-release
         update_cache: true
 
-    - name: Installation du paquet redis
+- name: Installation d'un serveur redis
+  hosts: debian,centos
+  become: true
+
+  tasks:
+    - name: Installation du paquet du serveur Redis
       ansible.builtin.package:
-        name: redis
+        name: "{{ redis_package_name }}"
         update_cache: true
 
-    - name: Configuration du service
+    - name: Configuration du service redis
       ansible.builtin.systemd:
-        name: redis
+        name: "{{ redis_service_name }}"
         state: started
         enabled: true
+
