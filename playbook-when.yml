@@ -6,4 +6,4 @@
     - name: Affichage du hostname si distribution Debian
       ansible.builtin.debug:
         msg: "Hostname: {{ ansible_hostname }}"
-      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+      when: ansible_distribution in ('Debian','Ubuntu')
