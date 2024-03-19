@@ -1,0 +1,13 @@
+---
+- name: Création de variables/facts
+  hosts: debian
+
+  tasks:
+    - name: Création de la variable user
+      ansible.builtin.set_fact:
+        user: bob
+        cacheable: true
+
+    - name: Affichage de la variable user
+      ansible.builtin.debug:
+        msg: "User: {{ user }}"
