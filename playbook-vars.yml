@@ -13,3 +13,11 @@
     - name: Affichage de la variable stage
       ansible.builtin.debug:
         msg: "Stage: {{ stage }}"
+
+    - name: Inclusion de variables
+      ansible.builtin.include_vars:
+        file: formation.yml
+
+    - name: Affichage de la variable stage
+      ansible.builtin.debug:
+        msg: "Stage: {{ stage }}"
