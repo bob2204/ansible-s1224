@@ -1,6 +1,6 @@
 ---
-- name: Installation du paquet epel-release
-  hosts: centos
+- name: Installation d'un serveur redis
+  hosts: debian,centos
   become: true
 
   tasks:
@@ -8,12 +8,8 @@
       ansible.builtin.package:
         name: epel-release
         update_cache: true
+      when: ansible_distribution == 'CentOS'
 
-- name: Installation d'un serveur redis
-  hosts: debian,centos
-  become: true
-
-  tasks:
     - name: Installation du paquet du serveur Redis
       ansible.builtin.package:
         name: "{{ redis_package_name }}"
