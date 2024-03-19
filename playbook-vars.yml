@@ -1,0 +1,8 @@
+---
+- name: Gestion des variables
+  hosts: debian,centos
+
+  tasks:
+    - name: Affichage des variables ansible_host
+      ansible.builtin.debug:
+        var: ansible_host
