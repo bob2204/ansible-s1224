@@ -5,4 +5,4 @@
   tasks:
     - name: Affichage des variables ansible_host
       ansible.builtin.debug:
-        msg: "IP: ansible_host"
+        msg: "IP: {{ ansible_host }}"
