@@ -1,11 +1,16 @@
 ---
 - name: Clause when
   hosts: debian,centos
-    
+
   tasks:
-    - name: Affichage du hostname si distribution Debian
-      ansible.builtin.debug:
-        msg: "Hostname: {{ ansible_hostname }}"
+    - name: Clause block when
       when:
         - ansible_distribution == 'Debian'
-        - ansible_distribution_version|int >= 11
+      block:
+        - name: Affichage du hostname si distribution Debian
+          ansible.builtin.debug:
+            msg: "Hostname: {{ ansible_hostname }}"
+
+        - name: Affichage de l'architecture si distribution Debian
+          ansible.builtin.debug:
+            msg: "Arch: {{ ansible_architecture }}"
