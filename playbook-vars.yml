@@ -2,7 +2,14 @@
 - name: Gestion des variables
   hosts: debian,centos
 
+  vars:
+    stage: Formation Ansible
+
   tasks:
     - name: Affichage des variables ansible_host
       ansible.builtin.debug:
         msg: "IP: {{ ansible_host }}"
+
+    - name: Affichage de la variable stage
+      ansible.builtin.debug:
+        msg: "Stage: {{ stage }}"
