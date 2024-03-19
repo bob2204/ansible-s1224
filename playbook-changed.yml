@@ -1,0 +1,9 @@
+---
+- name: Clause changed_when
+  hosts: debian
+
+  tasks:
+    - name: Module shell
+      ansible.builtin.shell:
+        cmd: echo coucou
+      changed_when: false
