@@ -1,0 +1,14 @@
+---
+- name: Les extra-variables
+  hosts: debian,centos
+
+  tasks:
+    - name: Variable user
+      ansible.builtin.debug:
+        msg: "User: {{ user }}"
+
+    - name: Création du compte
+      ansible.builtin.user:
+        name: "{{ user }}" 
+        state: absent
+      become: true
