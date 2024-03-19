@@ -1,8 +1,8 @@
 [debian]
-debiancli ansible_host=192.168.56.200
+debiancli
 
 [centos]
-centoscli ansible_host=192.168.56.210
+centoscli
 
 [linux:children]
 debian
@@ -10,6 +10,3 @@ centos
 
 [linux]
 cole
-
-[linux:vars]
-ansible_port=22
