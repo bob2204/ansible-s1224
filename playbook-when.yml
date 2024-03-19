@@ -1,0 +1,9 @@
+---
+- name: Clause when
+  hosts: debian,centos
+    
+  tasks:
+    - name: Affichage du hostname si distribution Debian
+      ansible.builtin.debug:
+        msg: "Hostname: {{ ansible_hostname }}"
+      when: ansible_distribution == 'Debian'
