@@ -5,8 +5,10 @@
   tasks:
     - name: Tâche témoin
       ansible.builtin.shell:
-        cmd: "grep {{ str }} /etc/passwd"
+        cmd: "grep {{ str }} /etc/psswd"
       register: result
+      failed_when: result.rc > 1
+      changed_when: false
 
     - name: Affichage de la variable result
       ansible.builtin.debug:
