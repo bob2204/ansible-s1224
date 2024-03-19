@@ -1,0 +1,8 @@
+---
+- name: Les facts
+  hosts: debian,centos
+
+  tasks:
+    - name: Distribution/Version de chaque cible
+      ansible.builtin.debug:
+        msg: "{{ ansible_distribution }} - {{ ansible_distribution_version }}"
