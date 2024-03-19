@@ -1,0 +1,13 @@
+---
+- name: Clause register
+  hosts: debiancli
+
+  tasks:
+    - name: Tâche témoin
+      ansible.builtin.shell:
+        cmd: "grep {{ str }} /etc/passwd"
+      register: result
+
+    - name: Affichage de la variable result
+      ansible.builtin.debug:
+        msg: "Code retour: {{ result.rc }}"
