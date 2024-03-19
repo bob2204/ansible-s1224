@@ -1,2 +1,3 @@
 redis_package_name: redis
 redis_service_name: redis
+redis_conf_filename: /etc/redis.conf
