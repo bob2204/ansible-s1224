@@ -1,0 +1,22 @@
+---
+- name: Mise en place d'une solution LEMP
+  hosts: www
+  become: true
+
+  tasks:
+    - name: Installation du service nginx
+      ansible.builtin.package:
+        name: "{{ nginx_package_name }}"
+        state: present
+        update_cache: true
+
+    - name: Configuration du service nginx
+      ansible.builtin.systemd:
+        name: "{{ nginx_service_name }}"
+        state: started
+        enabled: true
+
+    - name: Copie du site
+      ansible.builtin.copy:
+        src: site/
+        dest: "{{ nginx_document_root }}"
