@@ -1,0 +1,18 @@
+---
+logins:
+  - login: bob
+    shell: /bin/bash
+    password: azerty
+    groupes:
+      - docker
+      - ansible
+      - admin
+      - carto
+      - info
+  - login: curt
+    shell: /bin/bash
+    password: qwerty
+    groupes:
+      - admin
+      - sig
+      - carto
