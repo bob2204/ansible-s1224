@@ -1,0 +1,54 @@
+---
+- name: Quelques lookups
+  hosts: debian
+
+  vars:
+    stage_lille: Ansible
+    stage_toulouse: Docker
+    stage_lyon: Kubernetes
+    stage_rennes: revit
+
+    site: lille
+
+    sites:
+      - lille
+      - rennes
+      - lyon
+      - toulouse
+
+  tasks:
+    - name: Lookup dig
+      # Nécessite pip install dnspython
+      ansible.builtin.debug:
+        msg: "kernel.org: {{ lookup('dig','kernel.org') }}"
+      tags: never
+
+    - name: Lookup file
+      ansible.builtin.debug:
+        msg: "Fichier files/data.txt: {{ lookup('file','data.txt').split('\n')[-1] }}"
+      tags: never
+
+    - name: Lookup env
+      ansible.builtin.debug:
+        msg: "PATH: {{ lookup('env','PATH') }}"
+      tags: never
+
+    - name: Lookup vars
+      ansible.builtin.debug:
+        msg: "{{ site }}: {{ lookup('vars','stage_'+site) }}"
+      tags: never
+
+    - name: Lookup vars
+      ansible.builtin.debug:
+        msg: "{{ ville }}: {{ lookup('vars','stage_'+ville) }}"
+      loop: "{{ sites }}"
+      loop_control:
+        loop_var: ville
+      tags: never
+
+    - name: Lookup vars
+      ansible.builtin.debug:
+        msg: "{{ ville }}: {{ lookup('vars','stage_'+ville) }}"
+      loop: "{{ lookup('file','sites.txt').split('\n') }}"
+      loop_control:
+        loop_var: ville
