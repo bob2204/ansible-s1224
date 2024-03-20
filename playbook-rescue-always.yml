@@ -1,0 +1,32 @@
+---
+- name: Block rescue always
+  hosts: debian
+
+  tasks:
+    - name: block "try"
+      block:
+        - name: Tâche OK
+          ansible.builtin.debug:
+            msg: "Tâche OK"
+
+        - name: Tâche Pas OK
+          ansible.builtin.copy:
+            src: site
+            dest: /root
+
+        - name: Tâche OK
+          ansible.builtin.debug:
+            msg: "Tâche OK"
+      rescue:
+        - name: Tâche de secours
+          ansible.builtin.debug:
+            msg: "Essaye encore"
+          failed_when: true
+      always:
+        - name: Tâche à faire systématiquement
+          ansible.builtin.debug:
+            msg: "Ceci doit être fait dans tous les cas"
+
+    - name: Suite du playbook
+      ansible.builtin.debug:
+        msg: "Suite du playbook"
