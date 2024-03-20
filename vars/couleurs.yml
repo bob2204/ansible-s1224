@@ -1,0 +1,17 @@
+---
+couleurs:
+  - nom: rouge
+    tons:
+      - clair
+      - moyen
+      - foncé
+  - nom: vert
+    tons:
+      - pomme
+      - tige
+      - de gris
+  - nom: bleu
+    tons:
+      - ciel
+      - marine
+      - turquoise
