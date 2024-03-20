@@ -2,14 +2,17 @@
 - name: Les boucles
   hosts: debiancli
 
+  vars:
+    couleurs:
+      - cyan
+      - magenta
+      - indigo
+
   tasks:
     - name: Boucle de test
       ansible.builtin.debug:
         msg: "Couleur n°{{ index+1 }}: {{ couleur }}"
-      loop:
-        - cyan
-        - magenta
-        - indigo
+      loop: "{{ couleurs }}"
       loop_control:
         loop_var: couleur
         index_var: index

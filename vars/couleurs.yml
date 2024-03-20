@@ -5,11 +5,15 @@ couleurs:
       - clair
       - moyen
       - foncé
+      - étincelant
+      - feu
+      - gorge
   - nom: vert
     tons:
       - pomme
       - tige
       - de gris
+      - feuille
   - nom: bleu
     tons:
       - ciel

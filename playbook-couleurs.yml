@@ -1,0 +1,40 @@
+---
+- name: Les boucles
+  hosts: debiancli
+
+  tasks:
+    - name: Inclusion des variables
+      ansible.builtin.include_vars:
+        file: couleurs.yml
+
+    - name: Boucle de test avec join
+      ansible.builtin.debug:
+        msg: "Couleur n°{{ index+1 }}: {{ couleur.nom }} {{ couleur.tons| join(', ') }}"
+      loop: "{{ couleurs }}"
+      loop_control:
+        loop_var: couleur
+        index_var: index
+
+    - name: Boucle de test avec subelements
+      ansible.builtin.debug:
+        msg: "Couleur n°{{ index+1 }}: {{ couleur[0].nom }} {{ couleur[1] }}"
+      loop: "{{ couleurs|subelements('tons') }}"
+      loop_control:
+        loop_var: couleur
+        index_var: index
+
+    - name: Afficher chaque couleur avec le premier de ses tons
+      ansible.builtin.debug:
+        msg: "Couleur n°{{ index+1 }}: {{ couleur.nom }} {{ couleur.tons[0] }}"
+      loop: "{{ couleurs }}"
+      loop_control:
+        loop_var: couleur
+        index_var: index
+
+    - name: Afficher chaque couleur avec le dernier de ses tons
+      ansible.builtin.debug:
+        msg: "Couleur n°{{ index+1 }}: {{ couleur.nom }} {{ couleur.tons[-1] }}"
+      loop: "{{ couleurs }}"
+      loop_control:
+        loop_var: couleur
+        index_var: index
