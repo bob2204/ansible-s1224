@@ -1,0 +1,29 @@
+---
+- name: Création de groupes/logins
+  hosts: debiancli,centoscli
+  become: true
+
+  tasks:
+    - name: Inclusion du tableau logins
+      ansible.builtin.include_vars:
+        file: logins.yml
+
+    - name: Création des groupes
+      ansible.builtin.group:
+        name: "{{ login_groupes[1] }}"
+        state: present
+      loop: "{{ logins|subelements('groupes') }}"
+      loop_control:
+        loop_var: login_groupes
+        # login_groupes: liste des groupes secondaires du login courant
+
+    - name: Création des comptes
+      ansible.builtin.user:
+        name: "{{ login.login }}"
+        shell: "{{ login.shell }}"
+        groups: "{{ login.groupes }}"
+        password: "{{ login.password | password_hash('sha512',login.login) }}"
+      loop: "{{ logins }}"
+      loop_control:
+        loop_var: login
+      no_log: true
