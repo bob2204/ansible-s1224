@@ -1,0 +1,15 @@
+---
+- name: Lecture d'un fichiere csv
+  hosts: localhost
+
+  tasks:
+    - name: Lecture d'un fichier CSV
+      community.general.read_csv:
+        path: files/stage-sites.csv
+        fieldnames: site,stage
+        delimiter: ','
+      register: sites
+
+    - name: Affichage variable sites
+      ansible.builtin.debug:
+        msg: "{{ sites }}"
