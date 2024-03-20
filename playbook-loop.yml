@@ -1,0 +1,12 @@
+---
+- name: Les boucles
+  hosts: debiancli
+
+  tasks:
+    - name: Boucle de test
+      ansible.builtin.debug:
+        msg: "Couleur: {{ item }}"
+      loop:
+        - cyan
+        - magenta
+        - indigo
