@@ -1,3 +1,7 @@
 redis_package_name: redis-server
 redis_service_name: redis-server
 redis_conf_filename: /etc/redis/redis.conf
+
+nginx_package_name: nginx
+nginx_service_name: nginx
+nginx_document_root: /var/www/html
