@@ -5,6 +5,6 @@ Arch: {{ ansible_architecture }}
 Interfaces:
 {% for iface in ansible_interfaces %}
   {% if iface != 'lo' -%}
-     - {{ iface }}
+     - {{ iface }}: {{ lookup('vars','ansible_'+iface).ipv4.address }}
   {% endif %}
 {% endfor %}
