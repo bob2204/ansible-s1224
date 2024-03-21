@@ -1,0 +1,10 @@
+{# Ceci reste dans le template #}
+== Informations ==
+Cible: {{ inventory_hostname }}
+Arch: {{ ansible_architecture }}
+Interfaces:
+{% for iface in ansible_interfaces %}
+  {%- if iface != 'lo' -%}
+     - {{ iface }}
+  {%- endif +%}
+{% endfor %}

@@ -1,0 +1,14 @@
+---
+- name: Utilisation des templates
+  hosts: debian,centos
+
+  tasks:
+    - name: Vérification du template
+      ansible.builtin.debug:
+        msg: "{{ lookup('template','infos.txt.j2') }}"
+      tags: never
+
+    - name: Utilisation du module template
+      ansible.builtin.template:
+        src: infos.txt.j2
+        dest: /tmp/infos.txt
