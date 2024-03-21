@@ -1,0 +1,21 @@
+---
+- name: Fichier /tmp/infos.txt
+  hosts: debian,centos
+
+  tasks:
+    - name: Suppression du fichier
+      ansible.builtin.file:
+        dest: /tmp/infos.txt
+        state: absent
+      delegate_to: localhost
+
+    - name: Liste des interfaces réseau
+      ansible.builtin.lineinfile:
+        dest: /tmp/infos.txt
+        line: "{{ inventory_hostname }}: {{ iface }} {{ lookup('vars','ansible_'+iface).ipv4.address }}"
+        create: true
+        state: "{{ (iface == 'lo') | ternary('absent','present') }}"
+      loop: "{{ ansible_interfaces }}"
+      loop_control:
+        loop_var: iface
+      delegate_to: localhost
