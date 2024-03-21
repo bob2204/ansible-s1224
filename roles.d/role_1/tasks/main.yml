@@ -1,0 +1,8 @@
+---
+# tasks file for roles.d/role_1
+
+- name: Tâche n°1
+  ansible.builtin.debug:
+    msg: "Tâche n°1 du stage: {{ stage }}"
+  changed_when: true
+  notify: handler_test
