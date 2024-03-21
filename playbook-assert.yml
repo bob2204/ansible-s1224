@@ -1,0 +1,22 @@
+---
+- name: Module assert
+  hosts: debian,centoscli
+  serial: [1,10,100%]
+
+  tasks:
+    - name: Vérification de la distribution
+      ansible.builtin.assert:
+        that: ansible_distribution in ('Debian','Ubuntu')
+        success_msg: "Distribution OK"
+        fail_msg: "Distribution non supportée !"
+      any_errors_fatal: true
+
+    - name: Tâche suivante
+      ansible.builtin.debug:
+        msg: "On continue..."
+
+    - name: Ajout d'une ligne à /tmp/data.txt
+      ansible.builtin.lineinfile:
+        dest: /tmp/data.txt
+        line: Test
+        create: true
