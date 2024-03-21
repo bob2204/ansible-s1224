@@ -20,7 +20,6 @@
       ansible.builtin.template:
         src: default
         dest: /etc/nginx/sites-available/default
-        validate: nginx -c %s -t
       notify: restart_nginx
       when: nginx_server_port is defined
 
