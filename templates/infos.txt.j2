@@ -4,7 +4,7 @@ Cible: {{ inventory_hostname }}
 Arch: {{ ansible_architecture }}
 Interfaces:
 {% for iface in ansible_interfaces %}
-  {%- if iface != 'lo' -%}
+  {% if iface != 'lo' -%}
      - {{ iface }}
-  {%- endif +%}
+  {% endif %}
 {% endfor %}

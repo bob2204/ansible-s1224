@@ -12,3 +12,5 @@
       ansible.builtin.template:
         src: infos.txt.j2
         dest: /tmp/infos.txt
+        lstrip_blocks: true
+        trim_blocks: true
