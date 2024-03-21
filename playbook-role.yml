@@ -1,0 +1,12 @@
+---
+- name: Utilisation d'un rôle
+  hosts: debian
+
+  pre_tasks:
+    - name: Chargement de variables
+      ansible.builtin.include_vars:
+        file: stage.yml
+
+  roles:
+    - role: role_1
+      stage: Formation Ansible
