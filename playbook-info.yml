@@ -8,6 +8,7 @@
         dest: /tmp/infos.txt
         state: absent
       delegate_to: localhost
+      tags: never
 
     - name: Liste des interfaces réseau
       ansible.builtin.lineinfile:
@@ -18,4 +19,37 @@
       loop: "{{ ansible_interfaces }}"
       loop_control:
         loop_var: iface
+      delegate_to: localhost
+      tags: never
+
+    - name: Vérification de la présence de la variable file
+      ansible.builtin.assert:
+        that: file is defined
+        fail_msg: Variable file non définie
+
+    - name: Vérification de l'existence du fichier en extra-var file
+      ansible.builtin.stat:
+        dest: "{{ file }}"
+      delegate_to: localhost
+      register: filestat
+
+    - name: Statut de l'existence du fichier
+      ansible.builtin.assert:
+        that: filestat.stat.exists == true
+        fail_msg: "Le fichier {{ file }} n'existe pas"
+
+    - name: Lecture du fichier
+      ansible.builtin.debug:
+        msg: "Line '{{ line }}' trouvée"
+      when: 
+        - line is defined
+        - lookup('file',file).find(line) != -1
+      delegate_to: localhost
+
+    - name: Filtre sur str
+      ansible.builtin.debug:
+        msg: "{{ lookup('file',file)|regex_search('.*'+str+'.*')|string }}"
+      when: 
+        - str is defined
+        - lookup('file',file)|regex_search('.'+str+'.*')|string != 'None'
       delegate_to: localhost
