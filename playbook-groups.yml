@@ -1,0 +1,21 @@
+---
+- name: Variable magique groups
+  hosts: www,php
+
+  tasks:
+    - name: Variable groups
+      ansible.builtin.debug:
+        msg: "Variable groups: {{ groups }}"
+
+    - name: Clés de la variable groups
+      ansible.builtin.debug:
+        msg: "Clés de la variable groups: {{ groups.keys() }}"
+
+    - name: Membres du groupe www
+      ansible.builtin.debug:
+        msg: "Membres du groupe www: {{ groups.www }}"
+
+    - name: Test si la cible est membre du groupe www
+      ansible.builtin.debug:
+        msg: "{{ inventory_hostname }} est dans le groupe www"
+      when: inventory_hostname in groups.www
