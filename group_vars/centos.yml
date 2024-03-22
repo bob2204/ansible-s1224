@@ -1,3 +1,6 @@
 redis_package_name: redis
 redis_service_name: redis
 redis_conf_filename: /etc/redis.conf
+
+php_package_name: php-fpm
+php_service_name: php-fpm

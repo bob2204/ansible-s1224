@@ -12,6 +12,43 @@
     - name: Copie du site
       ansible.builtin.copy:
         src: site/
-        dest: "{{ nginx_document_root }}"
+        dest: "{{ document_root }}"
 
+    - block:
+        - name: Désactivation du firewall
+          ansible.builtin.systemd:
+            name: firewalld
+            state: stopped
 
+        - name: Installation php
+          ansible.builtin.package:
+            name: "{{ php_package_name }}"
+            state: present
+
+        - name: Configuration service php
+          ansible.builtin.systemd:
+            name: "{{ php_service_name }}"
+            state: started
+            enabled: true
+
+        - name: Acces externe
+          ansible.builtin.lineinfile:
+            dest: /etc/php-fpm.d/www.conf
+            regex: ^listen = .*$
+            line: listen = {{ php_server_address }}:9000
+        - name: Allow clients
+          ansible.builtin.lineinfile:
+            dest: /etc/php-fpm.d/www.conf
+            state: present
+            backrefs: true
+            regex: ^(listen.allowed_clients = .*)$
+            line: ;\1
+      when: inventory_hostname in groups.php
+      notify: restart_php
+
+  handlers:
+    - name: Restart php
+      ansible.builtin.systemd:
+        name: "{{ php_service_name }}"
+        state: restarted
+      listen: restart_php
