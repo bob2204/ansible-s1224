@@ -1,0 +1,16 @@
+---
+# defaults file for roles.d/nginx
+#
+
+# Port par défaut
+
+nginx_server_port: 80
+
+# Racine Web
+
+nginx_document_root: /var/www/html
+
+# php
+
+nginx_php_enabled: false
+php_server_address: 192.168.56.210

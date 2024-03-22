@@ -1,0 +1,21 @@
+---
+# tasks file for roles.d/nginx
+
+- name: Installation du service nginx
+  ansible.builtin.package:
+    name: "{{ nginx_package_name }}"
+    state: present
+    update_cache: true
+
+- name: Configuration du service nginx
+  ansible.builtin.systemd:
+    name: "{{ nginx_service_name }}"
+    state: started
+    enabled: true
+
+- name: Fichier de configuration
+  ansible.builtin.template:
+    src: default
+    dest: /etc/nginx/sites-available/default
+  notify: restart_nginx
+  when: nginx_server_port is defined
