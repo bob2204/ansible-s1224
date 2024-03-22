@@ -1,0 +1,8 @@
+---
+- name: Utilisation d'un filtre maison
+  hosts: localhost
+
+  tasks:
+    - name: Filtre maison filtre_test
+      ansible.builtin.debug:
+        msg: "{{ 'Bonjour' | filtre_test('Bob') }}"
