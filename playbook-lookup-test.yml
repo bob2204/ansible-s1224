@@ -1,0 +1,8 @@
+---
+- name: Lookup maison
+  hosts: localhost
+
+  tasks:
+    - name: Lookup explode
+      ansible.builtin.debug:
+        msg: "{{ lookup('explode','Salut',wantlist = true) }}"
